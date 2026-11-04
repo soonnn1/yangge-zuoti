@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>家人协助 · 洋哥做题了</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main class="shell family-shell">
+  <header class="family-header">
+    <span class="label">家人协助</span>
+    <h1>洋哥做题了</h1>
+    <p id="familyConnection" class="muted" role="status">正在连接儿童手机…</p>
+  </header>
+  <section class="card family-status-card">
+    <span class="label">当前状态</span>
+    <h2 id="familyStatus">读取中…</h2>
+    <p class="muted">本轮剩余时间</p>
+    <div id="familyRemaining" class="digits">--:--</div>
+  </section>
+  <section class="card">
+    <h2>快捷操作</h2>
+    <div class="family-actions">
+      <button id="familyLock" class="primary" type="button">立即弹题</button>
+      <button id="familyPractice" type="button">开始刷题（50题）</button>
+      <button id="familyRelease" type="button">家长放行</button>
+    </div>
+    <p id="familyPracticeStatus" class="family-meta muted" role="status">刷题模式未开启</p>
+    <p id="familyQuota" class="family-meta muted">今日放行剩余 3 次</p>
+    <p id="familyFeedback" class="family-feedback muted" role="status" aria-live="polite">只提供状态查看和快捷操作。</p>
+  </section>
+</main>
+<script src="/family.js"></script>
+</body>
+</html>

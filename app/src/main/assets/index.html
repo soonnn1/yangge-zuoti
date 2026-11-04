@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>洋哥做题了</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="parent-dashboard">
+<main class="shell">
+  <header class="topbar">
+    <h1>洋哥做题了</h1>
+    <label id="launcherIconControl" class="switch-control" for="launcherIconToggle" hidden>
+      <span class="switch-caption">图标隐藏</span>
+      <input id="launcherIconToggle" class="switch-input" type="checkbox" aria-label="图标隐藏">
+      <span class="switch-slider" aria-hidden="true"></span>
+    </label>
+    <span id="connection" class="badge" role="status">等待连接</span>
+  </header>
+
+  <section id="login" class="card login">
+    <h2>连接儿童手机</h2>
+    <p>请输入儿童手机设置的家长密码。</p>
+    <form id="loginForm">
+      <label for="key">家长密码</label>
+      <input id="key" type="password" inputmode="numeric" pattern="[0-9]{4,8}" maxlength="8" autocomplete="off" required placeholder="输入家长密码">
+      <button class="primary" type="submit">连接手机</button>
+    </form>
+    <p class="hint">配对信息保存在当前浏览器。</p>
+  </section>
+
+  <div id="dashboard" hidden>
+    <section class="card family-share-card" aria-label="整机管控与家人分享">
+      <label class="switch-control top-control" for="controlToggle">
+        <span class="switch-caption">整机管控</span>
+        <input id="controlToggle" class="switch-input" type="checkbox" aria-label="开启或暂停整机管控">
+        <span class="switch-slider" aria-hidden="true"></span>
+      </label>
+      <span id="familyShareLabel" class="family-share-label">分享</span>
+      <button id="familyShareCreate" type="button" class="primary">生成</button>
+      <button id="familyShareCopy" type="button" hidden>复制</button>
+      <button id="familyShareRevoke" type="button" hidden>撤销</button>
+      <span id="familyShareStatus" class="family-share-sr" role="status" aria-live="polite"></span>
+    </section>
+
+    <section class="card time-card">
+      <div class="time-layout">
+        <div class="time-summary">
+          <span class="label">本轮剩余</span>
+          <div id="remaining" class="digits">--:--</div>
+          <div id="mode" class="muted" hidden></div>
+        </div>
+        <div class="time-actions">
+          <label class="round-count" for="roundQuestions"><span>每轮</span><select id="roundQuestions" aria-label="每轮题数"></select><span>道题</span></label>
+          <button class="primary" data-action="lock">立即弹题</button>
+          <button class="primary" data-action="release">家长放行</button>
+          <button id="startPractice" type="button" class="primary" data-practice-action="start">开始刷题（50题）</button>
+        </div>
+        <p id="health" class="health-text"></p>
+      </div>
+      <div class="duration-setting">
+        <div class="duration-head"><label for="minutes">每轮时长</label><strong id="limitValue">30 分钟</strong></div>
+        <input id="minutes" class="range" type="range" min="1" max="120" step="1" value="30">
+      </div>
+      <details id="scheduleSettings" class="schedule-settings">
+        <summary><span>定时任务</span><span>设置 ›</span></summary>
+        <div id="scheduleList" class="schedule-list"></div>
+        <div class="schedule-form">
+          <label>任务类型<select id="scheduleType"><option value="quiz-window">定时弹题</option><option value="practice">定时刷题（50题）</option><option value="pause">暂停管控</option></select></label>
+          <label>开始时间<input id="scheduleTime" type="time" value="21:00"></label>
+          <label id="scheduleEndLabel"><span id="scheduleEndText">结束时间</span><input id="scheduleEnd" type="time" value="07:00"></label>
+          <label id="scheduleQuestionsLabel">每轮题数<select id="scheduleQuestions" aria-label="定时弹题每轮题数"></select></label>
+        </div>
+        <div class="schedule-days" role="group" aria-label="重复日期">
+          <label><input type="checkbox" name="scheduleDay" value="2" checked>一</label><label><input type="checkbox" name="scheduleDay" value="3" checked>二</label>
+          <label><input type="checkbox" name="scheduleDay" value="4" checked>三</label><label><input type="checkbox" name="scheduleDay" value="5" checked>四</label>
+          <label><input type="checkbox" name="scheduleDay" value="6" checked>五</label><label><input type="checkbox" name="scheduleDay" value="7" checked>六</label>
+          <label><input type="checkbox" name="scheduleDay" value="1" checked>日</label>
+        </div>
+        <button type="button" id="addSchedule">添加定时任务</button>
+        <p class="hint">按设备本地时间执行；结束时间早于开始时间表示次日结束。</p>
+      </details>
+      <details class="diagnostics"><summary>运行状态</summary><pre id="diagnostics">正在读取…</pre></details>
+    </section>
+
+    <section class="card bank-card">
+      <div class="section-heading">
+        <div><span class="label">题库生成</span></div>
+      </div>
+      <div class="bank-options">
+        <div class="bank-selects bank-course-grid">
+          <label class="bank-course-grade" for="bankGrade">年级
+            <select id="bankGrade"><option value="6" selected>小学六年级</option></select>
+          </label>
+          <label class="bank-course-subject" for="bankSubject">学科
+            <select id="bankSubject"><option value="数学" selected>数学</option></select>
+          </label>
+          <label class="bank-course-term" for="bankTerm">册别
+            <select id="bankTerm"><option value="上">上册</option></select>
+          </label>
+          <label class="bank-course-chapter" for="bankChapter">教材章节
+            <select id="bankChapter"><option value="">正在读取章节…</option></select>
+          </label>
+          <label class="bank-course-difficulty" for="bankDifficulty">出题难度
+            <select id="bankDifficulty">
+              <option value="basic">基础</option>
+              <option value="standard" selected>适中</option>
+              <option value="advanced">提高</option>
+            </select>
+          </label>
+        </div>
+        <p id="bankTextbook" class="muted" hidden>教材：西南大学出版社 · 六年级上册</p>
+        <label for="bankGuidance">给千问的出题说明
+          <textarea id="bankGuidance" rows="3" maxlength="600" placeholder="例如：数学多出分数应用题；英语优先校园生活阅读。"></textarea>
+        </label>
+        <div class="upload-row">
+          <label for="examImages">导入图片（最多 4 张）
+            <input id="examImages" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+          </label>
+          <label for="documentFile">导入 WPS（.doc、.docx）
+            <input id="documentFile" type="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+          </label>
+          <button id="openTextbookImport" class="textbook-import-button" type="button">导入教材知识库</button>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="generateBank" class="primary" type="button">生成</button>
+        <span id="bankMode" class="muted">图片、文档、章节分别生成</span>
+        <a id="clearExamImages" class="inline-link" href="#" hidden>清除文件</a>
+      </div>
+      <p id="generationError" class="muted" role="status" hidden></p>
+      <p id="generationProgress" class="muted" role="status" hidden></p>
+      <p id="autoSupplyStatus" class="muted" role="status" hidden></p>
+      <div id="importReviews" class="document-preview" hidden></div>
+      <p id="examStatus" class="muted" hidden></p>
+      <details id="examReport" class="exam-details" hidden>
+        <summary>查看试卷分析结果</summary>
+        <p id="examSummary"></p><div id="examWeaknesses" class="exam-weaknesses" hidden></div>
+        <a id="retryExam" class="inline-link" href="#" hidden>继续生成未完成的专项题</a>
+        <details class="exam-details"><summary>查看逐题识别结果</summary><div id="examRows"></div></details>
+        <p class="hint">识别不清的题会标为待确认；照片不保存在手机。</p>
+      </details>
+    </section>
+
+    <section class="card question-card">
+      <div class="section-heading">
+        <div><span class="label">AI 题库管理</span></div>
+        <div class="actions" role="group" aria-label="题目来源">
+          <button type="button" data-question-source="image">图片</button>
+          <button type="button" data-question-source="document">文档</button>
+          <button type="button" data-question-source="chapter" class="selected">章节</button>
+        </div>
+      </div>
+      <p id="questionSummary" class="muted">正在读取全部题目…</p>
+      <div class="question-filters" role="group" aria-label="筛选题目">
+        <button type="button" data-question-filter="all" class="selected">全部</button>
+        <button type="button" data-question-filter="unseen">未出现</button>
+        <button type="button" data-question-filter="correct">答对</button>
+        <button type="button" data-question-filter="wrong">答错</button>
+        <button type="button" data-question-filter="timeout">超时</button>
+      </div>
+      <div class="question-table-wrap"><table class="question-table"><thead><tr><th>题目</th><th>类型</th><th>记录</th></tr></thead><tbody id="questionRows"></tbody></table></div>
+      <div class="question-card-footer"><button id="applyQuestionBank" type="button" class="primary" disabled>应用该题库</button><button id="deleteQuestionBank" type="button" disabled>删除该题库</button></div>
+    </section>
+
+    <section class="card app-rules-card">
+      <div class="section-heading">
+        <div class="list-actions">
+          <button type="button" data-list="allow" aria-controls="addAppPanel" aria-expanded="false">白名单 <span id="whiteCount" class="count">0</span> <span aria-hidden="true">➕</span></button>
+          <button type="button" data-list="block" aria-controls="addAppPanel" aria-expanded="false">黑名单 <span id="blackCount" class="count">0</span> <span aria-hidden="true">➕</span></button>
+          <button id="refreshAppRules" type="button">刷新</button>
+        </div>
+      </div>
+      <div id="addAppPanel" class="app-add" hidden>
+        <select id="appPicker" aria-label="选择应用"><option value="">选择应用</option></select>
+        <button id="confirmAddApp" class="primary" type="button">加入白名单</button>
+      </div>
+      <div id="activeApps" class="app-list"><p class="empty-list">读取中…</p></div>
+      <p id="appRulesStatus" class="muted"></p>
+    </section>
+
+    <section class="card usage-card">
+      <div class="section-heading">
+        <div><span class="label">今日概览</span><h2>应用使用时间</h2></div>
+        <button id="refreshUsage" type="button">刷新统计</button>
+      </div>
+      <p class="hint">系统记录的前台使用时间，按时长排序。</p>
+      <div id="usage" class="usage"><p class="muted">读取中…</p></div>
+    </section>
+
+    <footer><button id="logout" class="link" type="button">退出家长端</button></footer>
+  </div>
+  <dialog id="textbookImportDialog" class="review-dialog textbook-dialog" aria-labelledby="textbookImportTitle">
+    <h2 id="textbookImportTitle">导入教材知识库</h2>
+    <div class="textbook-import-fields">
+      <label>年级<select id="textbookImportGrade"></select></label>
+      <label>学科<select id="textbookImportSubject"><option>语文</option><option>数学</option><option>英语</option><option>科学</option><option>道德与法治</option><option>思想政治</option><option>历史</option><option>地理</option><option>生物学</option><option>物理</option><option>化学</option><option>信息科技</option><option>信息技术</option><option>艺术</option><option>音乐</option><option>美术</option><option>劳动</option><option>体育与健康</option></select></label>
+      <label>册别<select id="textbookImportTerm"><option value="上">上册</option><option value="下">下册</option></select></label>
+    </div>
+    <label class="textbook-files-label">选择 Markdown 文件（可多选）<input id="textbookImportFiles" type="file" accept=".md,text/markdown,text/plain" multiple></label>
+    <p class="hint">每个文件作为一个章节；总索引默认不勾选，可修改章节名称。</p>
+    <div id="textbookImportPreview" class="textbook-preview"></div>
+    <p id="textbookImportError" class="hint" role="alert" hidden></p>
+    <div class="actions"><button id="saveTextbookImport" class="primary" type="button" disabled>保存教材</button><button id="closeTextbookImport" type="button">取消</button></div>
+  </dialog>
+  <dialog id="importReviewDialog" class="review-dialog" aria-labelledby="reviewTitle" aria-describedby="reviewReason">
+    <div class="review-heading"><h3 id="reviewTitle">确认题目</h3><button id="closeReview" type="button" aria-label="稍后处理">×</button></div>
+    <p id="reviewReason" class="review-reason"></p>
+    <form id="reviewForm">
+      <div class="review-meta">
+        <label>学科<input id="reviewSubject" type="text" maxlength="30" required></label>
+        <label>年级<select id="reviewGrade" required></select></label>
+      </div>
+      <label>所属章节<select id="reviewChapter" required><option value="">请选择所属章节</option></select></label>
+      <label>题干<textarea id="reviewStem" rows="4" maxlength="4000" required></textarea></label>
+      <div class="review-options">
+        <label>选项 A<textarea id="reviewOption0" rows="2" maxlength="1000" required></textarea></label>
+        <label>选项 B<textarea id="reviewOption1" rows="2" maxlength="1000" required></textarea></label>
+        <label>选项 C<textarea id="reviewOption2" rows="2" maxlength="1000" required></textarea></label>
+        <label>选项 D<textarea id="reviewOption3" rows="2" maxlength="1000" required></textarea></label>
+      </div>
+      <label>正确答案<select id="reviewAnswer" required><option value="">请选择</option><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></label>
+      <label>解题提示（选填）<textarea id="reviewExplanation" rows="2" maxlength="2000"></textarea></label>
+      <p id="reviewError" role="alert" hidden></p>
+      <p id="reviewAiStatus" role="status" hidden></p>
+      <div class="review-actions"><button id="skipReview" type="button">不加入题库</button><button id="aiCompleteReview" type="button">AI补全并加入题库</button><button id="confirmReview" type="submit" class="primary">确认加入题库</button></div>
+    </form>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>

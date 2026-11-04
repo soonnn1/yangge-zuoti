@@ -1,0 +1,13 @@
+build/
+.signing/
+releases/
+backups/
+local.properties
+.gradle/
+.DS_Store
+*.apk
+*.aab
+*.p12
+*.jks
+*.keystore
+*.sha256

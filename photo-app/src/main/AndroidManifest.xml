@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="cn.tan.yanggephoto" android:versionCode="1" android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="34" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="cn.tan.watchgate.permission.PHOTO_TUTOR_BRIDGE" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <queries><package android:name="cn.tan.watchgate" /></queries>
+    <application android:label="洋哥拍题" android:icon="@drawable/mascot_icon" android:theme="@style/AppTheme"
+        android:allowBackup="false" android:supportsRtl="true">
+        <activity android:name=".PhotoTutorActivity" android:exported="true" android:launchMode="singleTop">
+            <intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter>
+        </activity>
+        <provider android:name=".PhotoCaptureProvider" android:authorities="cn.tan.yanggephoto.photo_tutor"
+            android:exported="false" android:grantUriPermissions="true" />
+    </application>
+</manifest>

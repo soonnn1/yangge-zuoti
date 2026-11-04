@@ -1,0 +1,13 @@
+<resources>
+    <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">#3D62BC</item>
+        <item name="android:windowBackground">#F7F8FA</item>
+        <item name="android:statusBarColor">#F7F8FA</item>
+        <item name="android:navigationBarColor">#F7F8FA</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+    <string name="accessibility_description">由家长主动开启，用于识别应用切换，并在答题锁定期间尝试收起系统下拉栏。不读取屏幕文字、不执行点击、不上传数据。此权限可在系统设置中关闭。</string>
+</resources>
