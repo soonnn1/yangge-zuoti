@@ -46,5 +46,5 @@ fi
 "$TASK_JAVA_ROOT/bin/java" -jar "$TASK_TOOLS/lib/apksigner.jar" sign \
     --ks "$TASK_SIGN/watchgate.p12" --ks-key-alias watchgate \
     --ks-pass "file:$TASK_SIGN/password" \
-    --out "$TASK_OUTPUT/洋哥做题了-4.03.apk" "$TASK_BUILD/aligned.apk"
-echo "APK 已生成：$TASK_OUTPUT/洋哥做题了-4.03.apk"
+    --out "$TASK_OUTPUT/洋哥做题了-1.0.0.apk" "$TASK_BUILD/aligned.apk"
+echo "APK 已生成：$TASK_OUTPUT/洋哥做题了-1.0.0.apk"

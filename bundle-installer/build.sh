@@ -17,8 +17,8 @@ if [[ ! -x "$TASK_JAVA_ROOT/bin/javac" || ! -f "$TASK_PLATFORM" || ! -x "$TASK_T
 fi
 
 # 总安装器只打包本次构建的两个独立 APK。
-cp "$TASK_PROJECT_ROOT/releases/洋哥做题了-4.03.apk" "$TASK_ASSETS/watchgate.apk"
-cp "$TASK_PROJECT_ROOT/releases/洋哥拍题-1.0.apk" "$TASK_ASSETS/yanggephoto.apk"
+cp "$TASK_PROJECT_ROOT/releases/洋哥做题了-1.0.0.apk" "$TASK_ASSETS/watchgate.apk"
+cp "$TASK_PROJECT_ROOT/releases/洋哥拍题-1.0.0.apk" "$TASK_ASSETS/yanggephoto.apk"
 rm -rf "$TASK_BUILD/classes"
 mkdir -p "$TASK_BUILD/generated" "$TASK_BUILD/classes" "$TASK_BUILD/dex" "$TASK_PROJECT_ROOT/releases"
 "$TASK_TOOLS/aapt2" compile --dir "$TASK_SOURCE/res" -o "$TASK_BUILD/resources.zip"
@@ -37,5 +37,5 @@ zip -q -j "$TASK_BUILD/unsigned.apk" "$TASK_BUILD/dex/classes.dex"
 "$TASK_JAVA_ROOT/bin/java" -jar "$TASK_TOOLS/lib/apksigner.jar" sign \
     --ks "$TASK_PROJECT_ROOT/.signing/watchgate.p12" --ks-key-alias watchgate \
     --ks-pass "file:$TASK_PROJECT_ROOT/.signing/password" \
-    --out "$TASK_PROJECT_ROOT/releases/洋哥做题了-一键安装-4.03.apk" "$TASK_BUILD/aligned.apk"
-echo "安装器已生成：$TASK_PROJECT_ROOT/releases/洋哥做题了-一键安装-4.03.apk"
+    --out "$TASK_PROJECT_ROOT/releases/洋哥做题了-一键安装-1.0.0.apk" "$TASK_BUILD/aligned.apk"
+echo "安装器已生成：$TASK_PROJECT_ROOT/releases/洋哥做题了-一键安装-1.0.0.apk"

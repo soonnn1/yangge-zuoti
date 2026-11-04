@@ -16,6 +16,6 @@ mkdir -p "$TASK_TMP/classes" "$TASK_TMP/dex" "$TASK_ROOT/releases"
 cp "$TASK_TMP/base.apk" "$TASK_TMP/unsigned.apk"
 zip -q -j "$TASK_TMP/unsigned.apk" "$TASK_TMP/dex/classes.dex"
 "$TASK_TOOLS/zipalign" -f -p 4 "$TASK_TMP/unsigned.apk" "$TASK_TMP/aligned.apk"
-"$TASK_JAVA/bin/java" -jar "$TASK_TOOLS/lib/apksigner.jar" sign --ks "$TASK_ROOT/.signing/watchgate.p12" --ks-key-alias watchgate --ks-pass "file:$TASK_ROOT/.signing/password" --out "$TASK_ROOT/releases/WatchGate-Parent-1.4.apk" "$TASK_TMP/aligned.apk"
+"$TASK_JAVA/bin/java" -jar "$TASK_TOOLS/lib/apksigner.jar" sign --ks "$TASK_ROOT/.signing/watchgate.p12" --ks-key-alias watchgate --ks-pass "file:$TASK_ROOT/.signing/password" --out "$TASK_ROOT/releases/WatchGate-Parent-1.0.0.apk" "$TASK_TMP/aligned.apk"
 # 儿童端的下载二维码同步提供本次构建的家长端安装包。
-cp "$TASK_ROOT/releases/WatchGate-Parent-1.4.apk" "$TASK_ROOT/app/src/main/assets/parent.apk"
+cp "$TASK_ROOT/releases/WatchGate-Parent-1.0.0.apk" "$TASK_ROOT/app/src/main/assets/parent.apk"

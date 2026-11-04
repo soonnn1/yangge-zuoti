@@ -33,5 +33,5 @@ zip -q -j "$TASK_BUILD/unsigned.apk" "$TASK_BUILD/dex/classes.dex"
 "$TASK_JAVA_ROOT/bin/java" -jar "$TASK_TOOLS/lib/apksigner.jar" sign \
     --ks "$TASK_PROJECT_ROOT/.signing/watchgate.p12" --ks-key-alias watchgate \
     --ks-pass "file:$TASK_PROJECT_ROOT/.signing/password" \
-    --out "$TASK_PROJECT_ROOT/releases/洋哥拍题-1.0.apk" "$TASK_BUILD/aligned.apk"
-echo "APK 已生成：$TASK_PROJECT_ROOT/releases/洋哥拍题-1.0.apk"
+    --out "$TASK_PROJECT_ROOT/releases/洋哥拍题-1.0.0.apk" "$TASK_BUILD/aligned.apk"
+echo "APK 已生成：$TASK_PROJECT_ROOT/releases/洋哥拍题-1.0.0.apk"
