@@ -179,6 +179,8 @@ footer { display: flex; justify-content: flex-end; margin-top: 10px; }
 .textbook-dialog label { display:grid; gap:5px; }
 .textbook-dialog select,.textbook-dialog input { min-width:0; width:100%; }
 .textbook-files-label { margin-top:12px; }
+.textbook-example { margin:8px 0 12px; padding:10px 12px; border-radius:8px; background:#f4f7f2; color:var(--muted); font-size:12px; }
+.textbook-example pre { margin:6px 0 0; white-space:pre-wrap; overflow-wrap:anywhere; font-size:12px; line-height:1.5; }
 .textbook-preview { max-height:36vh; overflow:auto; display:grid; gap:8px; }
 .textbook-preview-row { display:grid; grid-template-columns:auto minmax(0,1fr); gap:8px; align-items:center; }
 .textbook-preview-row input[type="checkbox"] { width:auto; }

@@ -200,6 +200,14 @@
     </div>
     <label class="textbook-files-label">选择 Markdown 文件（可多选）<input id="textbookImportFiles" type="file" accept=".md,text/markdown,text/plain" multiple></label>
     <p class="hint">每个文件作为一个章节；总索引默认不勾选，可修改章节名称。</p>
+    <div class="textbook-example">
+      <span>例如：六年级数学上册的文件结构</span>
+      <pre>六年级数学上册/
+├─ 第一单元 分数乘法.md
+├─ 第二单元 圆.md
+└─ 第三单元 分数除法.md</pre>
+      <span>文件名可以自己命名，建议一个文件放一个单元；上传时可以一次选择多个文件。</span>
+    </div>
     <div id="textbookImportPreview" class="textbook-preview"></div>
     <p id="textbookImportError" class="hint" role="alert" hidden></p>
     <div class="actions"><button id="saveTextbookImport" class="primary" type="button" disabled>保存教材</button><button id="closeTextbookImport" type="button">取消</button></div>
